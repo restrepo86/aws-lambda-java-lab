@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.amazonaws:aws-java-sdk-cognitoidentity:1.11.250">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-cognitoidentity/1.11.250/dd0818e94991f2946cb9b85f7ba784fdf69aa16b/aws-java-sdk-cognitoidentity-1.11.250.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-cognitoidentity/1.11.250/40e39c70c859887c3ca34bf6935a21401f9b3b0b/aws-java-sdk-cognitoidentity-1.11.250-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
