@@ -37,7 +37,7 @@ public class Test extends IMC implements RequestStreamHandler {
             if (event.get("body") != null) {
                 JSONObject body = (JSONObject)parser.parse((String)event.get("body"));
                 if ( body.get("weight") != null) weight = (double) body.get("weight");
-                if ( body.get("height") != null) height = (double) body.get("height");
+                if ( body.get("height") != null) height = ((Number) body.get("height")).doubleValue();
             }
 
             IMC imcObject = new IMC();
