@@ -18,6 +18,27 @@ dependencies {
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 }
 
+buildscript {
+    dependencies {
+        classpath 'com.github.skhatri:gradle-s3-plugin:1.0.4'
+        classpath 'joda-time:joda-time:2.4'
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+apply plugin: 's3'
+
+s3 {
+    awsProfile = 'default'
+    bucket = 'test-lambda-gradle'
+    upload {
+        file = 'build/distributions/lambdaGradle-1.0-SNAPSHOT.zip'
+        key = 'lambdaGradle-1.0-SNAPSHOT.zip'
+    }
+}
+
+
 task buildZip(type: Zip) {
     from compileJava
     from processResources

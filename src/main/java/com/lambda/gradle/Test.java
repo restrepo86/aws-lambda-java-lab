@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.BufferedReader;
+import static java.lang.Math.toIntExact;
 
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -26,7 +27,7 @@ public class Test implements RequestStreamHandler {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         JSONObject responseJson = new JSONObject();
         String name = "you";
-        Long age = 0L;
+        int age = 0;
         String greeting;
         String responseCode = "200";
 
@@ -39,12 +40,12 @@ public class Test implements RequestStreamHandler {
                     name = (String)body.get("name");
                 }
                 if ( body.get("age") != null) {
-                    age = (Long) body.get("age");
+                    age =  toIntExact((Long) body.get("age"));
                 }
             }
 
             if (age >= 18){
-                greeting = "Hello, " + name + "! " + "Your are adult";
+                greeting = "Hello, " + name + "! " + "Your are adult ;)";
             } else {
                 greeting = "Hello, " + name + "! " + "Your are younger";
             }
