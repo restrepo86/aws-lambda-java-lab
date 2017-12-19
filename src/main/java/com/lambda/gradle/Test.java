@@ -26,8 +26,8 @@ public class Test extends IMC implements RequestStreamHandler {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         JSONObject responseJson = new JSONObject();
-        double weight;
-        double height;
+        double weight =0.0;
+        double height = 0.0;
         String estadoICM;
         String responseCode = "200";
 
@@ -36,12 +36,12 @@ public class Test extends IMC implements RequestStreamHandler {
 
             if (event.get("body") != null) {
                 JSONObject body = (JSONObject)parser.parse((String)event.get("body"));
-                if ( body.get("weight") != null) weight = (double) body.get("weight");
+                if ( body.get("weight") != null) weight = ((Number) body.get("weight")).doubleValue();
                 if ( body.get("height") != null) height = ((Number) body.get("height")).doubleValue();
             }
 
             IMC imcObject = new IMC();
-            double imc = imcObject.getIMC(80,1.70);
+            double imc = imcObject.getIMC(weight,height);
 
             if (imc < 16.00){
                 estadoICM = "Infrapeso: Delgadez Severa";
@@ -64,7 +64,9 @@ public class Test extends IMC implements RequestStreamHandler {
 
             JSONObject responseBody = new JSONObject();
             responseBody.put("input", event.toJSONString());
-            responseBody.put("message", estadoICM);
+            responseBody.put("state", estadoICM);
+            responseBody.put("weight", weight);
+            responseBody.put("height", height);
 
             JSONObject headerJson = new JSONObject();
             headerJson.put("x-custom-response-header", "my custom response header value");
