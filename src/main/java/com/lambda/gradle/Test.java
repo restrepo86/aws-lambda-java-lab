@@ -52,7 +52,7 @@ public class Test extends IMC implements RequestStreamHandler {
             }else if (imc > 18.50 && imc < 24.99){
                 estadoICM = "Peso Normal";
             }else if (imc > 25.00 && imc < 29.99){
-                estadoICM = "Sobrepeso";
+                estadoICM = "Sobrepeso, mas ejercicio";
             }else if (imc > 30.00 && imc < 34.99){
                 estadoICM = "Obeso: Tipo I";
             }else if (imc > 35.00 && imc < 40.00){
