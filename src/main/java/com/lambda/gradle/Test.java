@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-public class Test implements RequestStreamHandler {
+public class Test extends IMC implements RequestStreamHandler {
     JSONParser parser = new JSONParser();
 
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
@@ -26,9 +26,9 @@ public class Test implements RequestStreamHandler {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         JSONObject responseJson = new JSONObject();
-        String name = "you";
-        int age = 0;
-        String greeting;
+        double weight;
+        double height;
+        String estadoICM;
         String responseCode = "200";
 
         try {
@@ -36,24 +36,35 @@ public class Test implements RequestStreamHandler {
 
             if (event.get("body") != null) {
                 JSONObject body = (JSONObject)parser.parse((String)event.get("body"));
-                if ( body.get("name") != null) {
-                    name = (String)body.get("name");
-                }
-                if ( body.get("age") != null) {
-                    age =  toIntExact((Long) body.get("age"));
-                }
+                if ( body.get("weight") != null) weight = (double) body.get("weight");
+                if ( body.get("height") != null) height = (double) body.get("height");
             }
 
-            if (age >= 18){
-                greeting = "Hello, " + name + "! " + "Your are adult ;)";
-            } else {
-                greeting = "Hello, " + name + "! " + "Your are younger";
+            IMC imcObject = new IMC();
+            double imc = imcObject.getIMC(80,1.70);
+
+            if (imc < 16.00){
+                estadoICM = "Infrapeso: Delgadez Severa";
+            }else if (imc > 16.00 && imc < 16.99){
+                estadoICM = "Infrapeso: Delgadez moderada";
+            }else if (imc > 17.00 && imc < 18.49){
+                estadoICM = "Infrapeso: Delgadez aceptable";
+            }else if (imc > 18.50 && imc < 24.99){
+                estadoICM = "Peso Normal";
+            }else if (imc > 25.00 && imc < 29.99){
+                estadoICM = "Sobrepeso";
+            }else if (imc > 30.00 && imc < 34.99){
+                estadoICM = "Obeso: Tipo I";
+            }else if (imc > 35.00 && imc < 40.00){
+                estadoICM = "Obeso: Tipo II";
+            }else {
+                estadoICM = "Obeso: Tipo III";
             }
 
 
             JSONObject responseBody = new JSONObject();
             responseBody.put("input", event.toJSONString());
-            responseBody.put("message", greeting);
+            responseBody.put("message", estadoICM);
 
             JSONObject headerJson = new JSONObject();
             headerJson.put("x-custom-response-header", "my custom response header value");
