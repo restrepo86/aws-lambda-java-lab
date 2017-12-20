@@ -37,7 +37,18 @@ s3 {
         key = 'lambdaGradle-1.0-SNAPSHOT.zip'
     }
 }
-
+sourceSets {
+    main{
+        java{
+            srcDir 'src'
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
+}
 
 task buildZip(type: Zip) {
     from compileJava
