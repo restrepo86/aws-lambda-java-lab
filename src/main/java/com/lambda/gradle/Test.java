@@ -43,24 +43,7 @@ public class Test extends IMC implements RequestStreamHandler {
             IMC imcObject = new IMC();
             double imc = imcObject.getIMC(weight,height);
 
-            if (imc < 16.00){
-                estadoICM = "Infrapeso: Delgadez Severa";
-            }else if (imc > 16.00 && imc < 16.99){
-                estadoICM = "Infrapeso: Delgadez moderada";
-            }else if (imc > 17.00 && imc < 18.49){
-                estadoICM = "Infrapeso: Delgadez aceptable";
-            }else if (imc > 18.50 && imc < 24.99){
-                estadoICM = "Peso Normal";
-            }else if (imc > 25.00 && imc < 29.99){
-                estadoICM = "Sobrepeso";
-            }else if (imc > 30.00 && imc < 34.99){
-                estadoICM = "Obeso: Tipo I";
-            }else if (imc > 35.00 && imc < 40.00){
-                estadoICM = "Obeso: Tipo II";
-            }else {
-                estadoICM = "Obeso: Tipo III";
-            }
-
+            estadoICM = imcObject.getState(imc);
 
             JSONObject responseBody = new JSONObject();
             responseBody.put("input", event.toJSONString());
