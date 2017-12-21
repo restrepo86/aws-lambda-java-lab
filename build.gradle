@@ -2,6 +2,8 @@ group 'com.lambda.gradle'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 's3'
 
 sourceCompatibility = 1.8
 
@@ -28,7 +30,6 @@ buildscript {
         mavenCentral()
     }
 }
-apply plugin: 's3'
 
 s3 {
     awsProfile = 'default'
@@ -43,6 +44,14 @@ task buildZip(type: Zip) {
     from processResources
     into('lib') {
         from configurations.runtime
+    }
+}
+
+test {
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+        classDumpFile = file("$buildDir/jacoco/classpathdumps")
     }
 }
 
