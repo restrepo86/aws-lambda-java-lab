@@ -7,8 +7,7 @@ public class IMC {
 
     public double getIMC(double weight, double height){
 
-        double imc = weight/(Math.pow(height,2));
-        return imc;
+        return weight/(Math.pow(height,2));
     }
 
     public String getState(double imc){
