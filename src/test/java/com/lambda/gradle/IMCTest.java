@@ -61,4 +61,60 @@ public class IMCTest {
         assertEquals(41.52, imc, 0.2);
     }
 
+    @Test
+    public void stateInfrapesoSeveroIMC() throws Exception{
+        IMC objectIMC = new IMC();
+        String state = objectIMC.getState(15.0);
+        assertEquals("Infrapeso: Delgadez Severa",state);
+    }
+
+    @Test
+    public void stateInfrapesoModeradoIMC() throws Exception{
+        IMC objectIMC = new IMC();
+        String state = objectIMC.getState(16.5);
+        assertEquals("Infrapeso: Delgadez moderada",state);
+    }
+
+    @Test
+    public void stateInfrapesoAceptableIMC() throws Exception{
+        IMC objectIMC = new IMC();
+        String state = objectIMC.getState(17.5);
+        assertEquals("Infrapeso: Delgadez aceptable",state);
+    }
+
+    @Test
+    public void stateNormalIMC() throws Exception{
+        IMC objectIMC = new IMC();
+        String state = objectIMC.getState(22.5);
+        assertEquals("Peso Normal",state);
+    }
+
+    @Test
+    public void stateSobrepesoIMC() throws Exception{
+        IMC objectIMC = new IMC();
+        String state = objectIMC.getState(28.5);
+        assertEquals("Sobrepeso",state);
+    }
+
+    @Test
+    public void stateObesoTipo1IMC() throws Exception{
+        IMC objectIMC = new IMC();
+        String state = objectIMC.getState(32.5);
+        assertEquals("Obeso: Tipo I",state);
+    }
+
+    @Test
+    public void stateObesoTipo2IMC() throws Exception{
+        IMC objectIMC = new IMC();
+        String state = objectIMC.getState(36.5);
+        assertEquals("Obeso: Tipo II",state);
+    }
+
+    @Test
+    public void stateObesoTipo3IMC() throws Exception{
+        IMC objectIMC = new IMC();
+        String state = objectIMC.getState(43.5);
+        assertEquals("Obeso: Tipo III",state);
+    }
+
 }
