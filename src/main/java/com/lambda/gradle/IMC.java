@@ -3,6 +3,7 @@ package com.lambda.gradle;
 public class IMC {
 
     public IMC() {
+        //Constructor
     }
 
     public double getIMC(double weight, double height){
