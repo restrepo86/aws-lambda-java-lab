@@ -1,23 +1,18 @@
 package com.lambda.gradle;
 
 public class IMC {
-    private double weight;
-    private double height;
-    private double imc;
 
     public IMC() {
     }
 
     public double getIMC(double weight, double height){
-        this.weight = weight;
-        this.height = height;
 
         double imc = weight/(Math.pow(height,2));
         return imc;
     }
 
     public String getState(double imc){
-        this.imc = imc;
+
         String state;
 
         if (imc < 16.00){
