@@ -34,4 +34,14 @@ public class IMC {
         }
         return state;
     }
+
+    public double getNormalWeight(double weight, double height) {
+      Double imc = getIMC(weight,height);
+
+      while (imc > 24.99){
+          weight--;
+          imc = getIMC(weight,height);
+      }
+      return weight;
+    }
 }

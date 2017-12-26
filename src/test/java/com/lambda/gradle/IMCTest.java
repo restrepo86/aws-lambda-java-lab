@@ -117,4 +117,11 @@ public class IMCTest {
         assertEquals("Obeso: Tipo III",state);
     }
 
+    @Test
+    public void getNormalWeight() throws Exception{
+        IMC objectIMC = new IMC();
+        Double normalWeight = objectIMC.getNormalWeight(80,1.70);
+        assertEquals(72,normalWeight,0.2);
+    }
+
 }
