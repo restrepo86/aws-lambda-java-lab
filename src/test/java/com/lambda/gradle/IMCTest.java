@@ -74,7 +74,7 @@ public class IMCTest {
         StateFactory stateFactory = new StateFactory();
         State stateIMC = stateFactory.getState(16.5);
         String state = stateIMC.get();
-        assertEquals("Infrapeso: Delgadez moderada",state);
+        assertEquals("Infrapeso: Delgadez Moderada",state);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class IMCTest {
         StateFactory stateFactory = new StateFactory();
         State stateIMC = stateFactory.getState(17.5);
         String state = stateIMC.get();
-        assertEquals("Infrapeso: Delgadez aceptable",state);
+        assertEquals("Infrapeso: Delgadez Aceptable",state);
     }
 
     @Test
