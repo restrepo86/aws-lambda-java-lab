@@ -29,7 +29,6 @@ public class Test extends IMC implements RequestStreamHandler {
         double weight =0.0;
         double height = 0.0;
         double normalWeight = 0.0;
-        String estadoICM;
         String responseCode = "200";
         final String paramWeight = "weight";
         final String paramHeight = "height";
@@ -46,12 +45,14 @@ public class Test extends IMC implements RequestStreamHandler {
             IMC imcObject = new IMC();
             double imc = imcObject.getIMC(weight,height);
 
-            estadoICM = imcObject.getState(imc);
+            StateFactory stateFactory = new StateFactory();
+            State stateIMC = stateFactory.getState(imc);
+            String state = stateIMC.get();
             normalWeight = getNormalWeight(weight,height);
 
             JSONObject responseBody = new JSONObject();
             responseBody.put("input", event.toJSONString());
-            responseBody.put("state", estadoICM);
+            responseBody.put("state", state);
             responseBody.put(paramWeight, weight);
             responseBody.put(paramHeight, height);
             responseBody.put("pesoMaximo",normalWeight);
