@@ -40,10 +40,18 @@ public class Test extends IMC implements RequestStreamHandler {
 
             if (event.get("body") != null) {
                 JSONObject body = (JSONObject)parser.parse((String)event.get("body"));
-                if ( body.get(paramWeight) != null) weight = ((Number) body.get(paramWeight)).doubleValue();
-                if ( body.get(paramHeight) != null) height = ((Number) body.get(paramHeight)).doubleValue();
-                if ( body.get(edad) != null) edad = ((Integer) body.get(edad));
-                if ( body.get(genero) != null) genero = ((Character) body.get(genero));
+                if ( body.get(paramWeight) != null) {
+                    weight = ((Number) body.get(paramWeight)).doubleValue();
+                }
+                if ( body.get(paramHeight) != null){
+                    height = ((Number) body.get(paramHeight)).doubleValue();
+                }
+                if ( body.get(edad) != null){
+                    edad = ((Integer) body.get(edad));
+                }
+                if ( body.get(genero) != null){
+                    genero = ((Character) body.get(genero));
+                }
             }
 
             IMC imcObject = new IMC();
