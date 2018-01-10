@@ -26,6 +26,8 @@ public class Test extends IMC implements RequestStreamHandler {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         JSONObject responseJson = new JSONObject();
+        int edad = 0;
+        char genero = 'f';
         double weight =0.0;
         double height = 0.0;
         double normalWeight = 0.0;
@@ -40,6 +42,8 @@ public class Test extends IMC implements RequestStreamHandler {
                 JSONObject body = (JSONObject)parser.parse((String)event.get("body"));
                 if ( body.get(paramWeight) != null) weight = ((Number) body.get(paramWeight)).doubleValue();
                 if ( body.get(paramHeight) != null) height = ((Number) body.get(paramHeight)).doubleValue();
+                if ( body.get(edad) != null) edad = ((Integer) body.get(edad));
+                if ( body.get(genero) != null) genero = ((Character) body.get(genero));
             }
 
             IMC imcObject = new IMC();
@@ -50,12 +54,17 @@ public class Test extends IMC implements RequestStreamHandler {
             String state = stateIMC.get();
             normalWeight = getNormalWeight(weight,height);
 
+            IGCFactory igcFactory = new IGCFactory();
+            double igc = igcFactory.getIGC(imc, genero, edad);
+
             JSONObject responseBody = new JSONObject();
             responseBody.put("input", event.toJSONString());
             responseBody.put("state", state);
             responseBody.put(paramWeight, weight);
             responseBody.put(paramHeight, height);
             responseBody.put("pesoMaximo",normalWeight);
+            responseBody.put("imc",imc);
+            responseBody.put("igc",igc);
 
             JSONObject headerJson = new JSONObject();
             headerJson.put("x-custom-response-header", "my custom response header value");
