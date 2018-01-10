@@ -5,7 +5,8 @@ public class IGCFactory {
         if (genero == 'f'){
             IGCFemenino igcFemenino = new IGCFemenino();
             return igcFemenino.get(imc,edad);
-        } else if (genero == 'm'){
+        }
+        if (genero == 'm'){
             IGCMasculino igcMasculino = new IGCMasculino();
             return igcMasculino.get(imc,edad);
         }else {
