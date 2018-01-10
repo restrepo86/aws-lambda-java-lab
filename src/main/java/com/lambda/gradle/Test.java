@@ -47,10 +47,10 @@ public class Test extends IMC implements RequestStreamHandler {
                     height = ((Number) body.get(paramHeight)).doubleValue();
                 }
                 if ( body.get(edad) != null){
-                    edad = ((Integer) body.get(edad));
+                    edad = (Integer) body.get(edad);
                 }
                 if ( body.get(genero) != null){
-                    genero = ((Character) body.get(genero));
+                    genero = (Character) body.get(genero);
                 }
             }
 
