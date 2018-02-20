@@ -15,7 +15,7 @@ public class IMCTest {
     public void infrapesoSeveroIMC() throws Exception {
         IMC objectIMC = new IMC();
         double imc = objectIMC.getIMC(40,1.70);
-        assertEquals(13.84, imc, 0.99);
+        assertEquals(13.84, imc, 0.2);
     }
 
     @Test
