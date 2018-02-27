@@ -1,5 +1,5 @@
 group 'com.lambda.gradle'
-version '1.0-SNAPSHOT'
+version = versionNumber
 def bucketName= bucket
 
 apply plugin: 'java'
@@ -36,8 +36,8 @@ s3 {
     awsProfile = 'default'
     bucket = bucketName
     upload {
-        file = 'build/distributions/lambdaGradle-1.0-SNAPSHOT.zip'
-        key = 'lambdaGradle-1.0-SNAPSHOT.zip'
+        file = "build/distributions/lambdaGradle-${version}.zip"
+        key = "lambdaGradle-${version}.zip"
     }
 }
 task buildZip(type: Zip) {
