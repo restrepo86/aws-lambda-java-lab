@@ -1,6 +1,6 @@
 group 'com.lambda.gradle'
-version = versionNumber
-def bucketName= bucket
+version System.getenv("BUILD_NUMBER")
+def bucketName= "imc-0"
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
@@ -25,7 +25,7 @@ dependencies {
 buildscript {
     dependencies {
         classpath 'com.github.skhatri:gradle-s3-plugin:1.0.4'
-        classpath 'joda-time:joda-time:2.4'
+        classpath 'joda-time:joda-time:2.8.1'
     }
     repositories {
         mavenCentral()
