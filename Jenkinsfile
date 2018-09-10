@@ -13,8 +13,12 @@ pipeline {
     stage('Test') {
       steps {
         sh './gradlew test'
-        sh 'ls -lrt build/test-results/test'
       }
+      post {
+            always {
+               junit "**/TEST-com.lambda.gradle.*.xml"
+            }
+        }
     }
   }
 }
