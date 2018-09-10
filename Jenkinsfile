@@ -3,7 +3,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh './gradlew build -x test'
+        sh '''
+
+
+./gradlew build -x test'''
+        sh 'ls -lrt'
       }
     }
     stage('Test') {
