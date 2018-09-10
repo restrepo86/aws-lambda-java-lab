@@ -13,7 +13,7 @@ pipeline {
     stage('Test') {
       steps {
         sh './gradlew test'
-        sh 'ls -lrt build'
+        sh 'ls -lrt build/test-results'
       }
     }
   }
