@@ -10,15 +10,22 @@ pipeline {
       }
     }
     stage('Test') {
-      steps{
+      post {
+        always {
+          archiveArtifacts(artifacts: 'build/libs/**/*.jar', fingerprint: true)
+          junit 'build/test-results/test/*.xml'
+
+        }
+
+      }
+      steps {
         sh './gradlew test'
       }
-      post {
-            always {
-              archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-              junit "build/test-results/test/*.xml"
-            }
-        }
+    }
+    stage('SonarQube') {
+      steps {
+        withSonarQubeEnv 'SonarScanner3'
+      }
     }
   }
 }
