@@ -23,9 +23,12 @@ pipeline {
       }
     }
     stage('SonarQube') {
+      environment {
+        scannerHome = 'SonarScanner3'
+      }
       steps {
         withSonarQubeEnv 'Cloud'
-          sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar.properties"
+        sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar.properties"
       }
     }
   }
