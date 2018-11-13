@@ -24,7 +24,10 @@ pipeline {
     }
     stage('SonarQube') {
       steps {
-        withSonarQubeEnv 'SonarScanner3'
+        def scannerHome = tool 'SonarScanner3';
+        withSonarQubeEnv 'Cloud'{
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
       }
     }
   }
