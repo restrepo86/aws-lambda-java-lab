@@ -28,7 +28,8 @@ pipeline {
       }
       steps {
         withSonarQubeEnv ('SonarQube Cloud'){
-          sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar.properties"
+          sh "wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip && unzip sonar-scanner-cli-3.2.0.1227-linux.zip"
+          sh "sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -Dproject.settings=sonar.properties"
         }
       }
     }
