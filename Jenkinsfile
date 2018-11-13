@@ -24,9 +24,9 @@ pipeline {
     }
     stage('SonarQube') {
       steps {
-        withSonarQubeEnv 'Cloud'{
+        withSonarQubeEnv 'Cloud'
+          def scannerHome = tool 'SonarScanner3'
           sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar.properties"
-        }
       }
     }
   }
