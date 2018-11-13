@@ -15,7 +15,8 @@ pipeline {
       }
       post {
             always {
-               junit "**/TEST-com.lambda.gradle.*.xml"
+              archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+              junit "build/test-results/test/*.xml"
             }
         }
     }
