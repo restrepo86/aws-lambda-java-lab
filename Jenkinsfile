@@ -32,5 +32,10 @@ pipeline {
         }
       }
     }
+    stage('Create Bucket'){
+      withAWS(credentials:'awslab') {
+        sh "aws "
+      }
+    }
   }
 }
