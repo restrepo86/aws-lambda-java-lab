@@ -34,8 +34,8 @@ pipeline {
       }
     }
     stage('Create Bucket'){
-      withAWS(credentials:'awslab') {
-        steps {
+      steps {
+        withAWS(credentials:'awslab') {
           sh "aws"
         }
       }
