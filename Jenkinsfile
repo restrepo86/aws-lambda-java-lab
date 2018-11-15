@@ -36,7 +36,7 @@ pipeline {
     stage('Create Bucket'){
       steps {
         withAWS(credentials:'awslab') {
-          sh "aws"
+          sh "aws s3 ls"
         }
       }
     }
