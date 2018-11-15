@@ -1,9 +1,9 @@
 pipeline {
   agent any
+  environment {
+    projectName = 'juanesProject'
+  }
   stages {
-    environment {
-      projectName = 'juanesProject'
-    }
     stage('Build') {
       steps {
         sh '''
