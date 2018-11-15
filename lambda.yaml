@@ -2,7 +2,10 @@ Parameters:
   ProjectName:
     Description: Nombre del proyecto
     Type: String
-    Default: juanes
+
+  JarName:
+    Description: Nombre del jar
+    Type: String
 
 Resources:
     LambdaIMCRole:
@@ -46,6 +49,6 @@ Resources:
         Role: !GetAtt LambdaIMCRole.Arn
         Code:
           S3Bucket: "juanes-lambda-function"
-          S3Key: "lambdaGradle.jar"
+          S3Key: !Ref JarName
         Runtime: "java8"
         Timeout: "25"

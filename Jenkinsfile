@@ -34,19 +34,20 @@ pipeline {
       steps {
         withAWS(credentials: 'awslab', region: 'us-east-1') {
           cfnUpdate(stack: "${projectName}-s3", create: true, file: 's3.yaml')
-          s3Upload(bucket: 'juanes-lambda-function', file: "lambdaGradle-${BUILD_NUMBER}.jar", workingDir: 'build/libs/')
+          s3Upload(bucket: 'juanes-lambda-function', file: "${jarName}", workingDir: 'build/libs/')
         }
       }
     }
     stage('Deploy Lambda') {
       steps {
         withAWS(credentials: 'awslab', region: 'us-east-1') {
-          cfnUpdate(stack: "${projectName}-lambda", create: true, file: 'lambda.yaml')
+          cfnUpdate(stack: "${projectName}-lambda", create: true, file: 'lambda.yaml', params:["ProjectName=${projectName}", "JarName=${jarName}"])
         }
       }
     }
   }
   environment {
     projectName = 'juanesProject'
+    jarName = "lambdaGradle-${BUILD_NUMBER}.jar"
   }
 }
