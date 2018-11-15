@@ -33,14 +33,14 @@ pipeline {
 
       }
     }
-    stage('Deploy Lambda') {
-      steps {
-        cfnUpdate(stack: '${projectName}', create: true, file: 'lambda.yaml')
-      }
-    }
     stage('Create Bucket'){
       withAWS(credentials:'awslab') {
         sh "aws "
+      }
+    }
+    stage('Deploy Lambda') {
+      steps {
+        cfnUpdate(stack: '${projectName}', create: true, file: 'lambda.yaml')
       }
     }
   }

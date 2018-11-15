@@ -2,6 +2,7 @@ Parameters:
   ProjectName:
     Description: Nombre del proyecto
     Type: String
+    Default: juanes
 
 Resources:
     LmabdaIMCRole:
@@ -10,7 +11,7 @@ Resources:
             RoleName: !Sub ${ProjectName}-LambdaExecutionRole
             Path: /
             Policies:
-              - PolicyName: !Sub ${Cluster}-ScalableTargetRole-Policy
+              - PolicyName: !Sub ${ProjectName}-Role-Policy
                 PolicyDocument:
                     {
                       "Version": "2012-10-17",
@@ -27,14 +28,14 @@ Resources:
                       ]
                     }
 
-
     LambdaIMC:
       Type: AWS::Lambda::Function
       Properties:
         Handler: "Test::handleRequest"
-        Role: !GetAtt LmabdaIMCRole.Arn
+        Role:
+          !GetAtt: LmabdaIMCRole.Arn
         Code:
           S3Bucket: "lambda-functions"
-          S3Key: "lambdaGradle.jar"
+          S3Key: "amilookup.zip"
         Runtime: "java8"
         Timeout: "25"
