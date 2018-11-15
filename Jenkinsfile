@@ -35,7 +35,9 @@ pipeline {
     }
     stage('Create Bucket'){
       withAWS(credentials:'awslab') {
-        sh "aws "
+        steps {
+          sh "aws"
+        }
       }
     }
     stage('Deploy Lambda') {
