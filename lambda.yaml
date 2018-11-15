@@ -12,6 +12,18 @@ Resources:
             Path: /
             Policies:
               - PolicyName: !Sub ${ProjectName}-Role-Policy
+                  AsumeRolePolicyDocument:
+                    Version: "2012-10-17"
+                    Statement:
+                      -
+                        Effect: "Allow"
+                        Principal:
+                          Service:
+                            - "ec2.amazonaws.com"
+                        Action:
+                          - "sts:AssumeRole"
+                  Path: "/"
+
                 PolicyDocument:
                     {
                       "Version": "2012-10-17",
