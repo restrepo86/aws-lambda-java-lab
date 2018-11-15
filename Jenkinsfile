@@ -34,9 +34,8 @@ pipeline {
       steps {
         withAWS(credentials: 'awslab', region: 'us-east-1') {
           cfnUpdate(stack: "${projectName}-s3", create: true, file: 's3.yaml')
+          s3Upload(bucket: 'juanes-lambda-function', file: 'lambdaGradle.jar', workingDir: 'build/libs/')
         }
-
-        s3Upload(bucket: 'juanes-lambda-function', file: 'lambdaGradle.jar', workingDir: 'build/libs/')
       }
     }
     stage('Deploy Lambda') {
