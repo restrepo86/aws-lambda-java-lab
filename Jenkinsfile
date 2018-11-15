@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  environment {
-    projectName = 'juanesProject'
-  }
   stages {
     stage('Build') {
       steps {
@@ -33,19 +30,25 @@ pipeline {
 
       }
     }
-    stage('Create Bucke/Update file'){
+    stage('Create Bucke/Update file') {
       steps {
-        withAWS(credentials:'awslab', region: "us-east-1") {
+        withAWS(credentials: 'awslab', region: 'us-east-1') {
           cfnUpdate(stack: "${projectName}-s3", create: true, file: 's3.yaml')
         }
+
+        s3Upload(bucket: 'juanes-lambda-function', file: 'lambdaGradle.jar', workingDir: 'build/libs/')
       }
     }
     stage('Deploy Lambda') {
       steps {
-        withAWS(credentials:'awslab', region: "us-east-1") {
+        withAWS(credentials: 'awslab', region: 'us-east-1') {
           cfnUpdate(stack: "${projectName}-lambda", create: true, file: 'lambda.yaml')
         }
+
       }
     }
+  }
+  environment {
+    projectName = 'juanesProject'
   }
 }
