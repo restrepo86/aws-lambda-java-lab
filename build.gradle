@@ -32,14 +32,6 @@ buildscript {
     }
 }
 
-s3 {
-    awsProfile = 'default'
-    bucket = bucketName
-    upload {
-        file = "build/distributions/lambdaGradle-${version}.zip"
-        key = "lambdaGradle-${version}.zip"
-    }
-}
 task buildZip(type: Zip) {
     from compileJava
     from processResources
