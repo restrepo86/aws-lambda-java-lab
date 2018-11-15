@@ -2,5 +2,5 @@ Resources:
   S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: juanes-lambda-functions
+      BucketName: juanes-lambda-function
       AccessControl: BucketOwnerFullControl
