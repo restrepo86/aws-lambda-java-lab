@@ -1,6 +1,9 @@
 pipeline {
   agent any
   stages {
+    environment {
+      projectName = 'juanesProject'
+    }
     stage('Build') {
       steps {
         sh '''
@@ -23,9 +26,6 @@ pipeline {
       }
     }
     stage('SonarQube') {
-      environment {
-        scannerHome = 'SonarScanner3'
-      }
       steps {
         withSonarQubeEnv('SonarQube Cloud') {
           sh 'sonar-scanner -Dproject.settings=sonar.properties'
@@ -33,16 +33,18 @@ pipeline {
 
       }
     }
-    stage('Create Bucket'){
+    stage('Create Bucke/Update file'){
       steps {
         withAWS(credentials:'awslab') {
-          sh "aws s3 ls"
+          cfnUpdate(stack: '${projectName}-s3', create: true, file: 's3.yaml')
         }
       }
     }
     stage('Deploy Lambda') {
       steps {
-        cfnUpdate(stack: '${projectName}', create: true, file: 'lambda.yaml')
+        withAWS(credentials:'awslab') {
+          cfnUpdate(stack: '${projectName}-lambda', create: true, file: 'lambda.yaml')
+        }
       }
     }
   }
