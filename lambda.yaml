@@ -1,0 +1,40 @@
+Parameters:
+  ProjectName:
+    Description: Nombre del proyecto
+    Type: String
+
+Resources:
+    LmabdaIMCRole:
+        Type: AWS::IAM::Role
+        Properties:
+            RoleName: !Sub ${ProjectName}-LambdaExecutionRole
+            Path: /
+            Policies:
+              - PolicyName: !Sub ${Cluster}-ScalableTargetRole-Policy
+                PolicyDocument:
+                    {
+                      "Version": "2012-10-17",
+                      "Statement": [
+                        {
+                          "Effect": "Allow",
+                          "Action": [
+                            "logs:CreateLogGroup",
+                            "logs:CreateLogStream",
+                            "logs:PutLogEvents"
+                          ],
+                          "Resource": "arn:aws:logs:*:*:*"
+                        }
+                      ]
+                    }
+
+
+    LambdaIMC:
+      Type: AWS::Lambda::Function
+      Properties:
+        Handler: "Test::handleRequest"
+        Role: !GetAtt LmabdaIMCRole.Arn
+        Code:
+          S3Bucket: "lambda-functions"
+          S3Key: "lambdaGradle.jar"
+        Runtime: "java8"
+        Timeout: "25"
