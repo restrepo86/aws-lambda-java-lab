@@ -35,14 +35,14 @@ pipeline {
     }
     stage('Create Bucke/Update file'){
       steps {
-        withAWS(credentials:'awslab') {
+        withAWS(credentials:'awslab', region: "us-east-1") {
           cfnUpdate(stack: "${projectName}-s3", create: true, file: 's3.yaml')
         }
       }
     }
     stage('Deploy Lambda') {
       steps {
-        withAWS(credentials:'awslab') {
+        withAWS(credentials:'awslab', region: "us-east-1") {
           cfnUpdate(stack: "${projectName}-lambda", create: true, file: 'lambda.yaml')
         }
       }
