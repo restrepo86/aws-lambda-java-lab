@@ -26,9 +26,8 @@ pipeline {
       steps {
         withSonarQubeEnv('SonarQube Cloud') {
           sh 'sonar-scanner -Dproject.settings=sonar.properties'
-          waitForQualityGate true
         }
-
+        waitForQualityGate true
       }
     }
     stage('Create Bucket/Update file') {
