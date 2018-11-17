@@ -71,7 +71,7 @@ Resources:
             IntegrationHttpMethod: "POST"
             Type: "AWS_PROXY"
             Uri: !Sub
-              - "arn:aws:ApiGateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations"
+              - "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations"
               - lambdaArn: !GetAtt "LambdaIMC.Arn"
           ResourceId: !GetAtt "ApiGateway.RootResourceId"
           RestApiId: !Ref "ApiGateway"
