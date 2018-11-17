@@ -49,7 +49,7 @@ Resources:
     LambdaIMC:
       Type: AWS::Lambda::Function
       Properties:
-        Handler: "com.lambda.gradle.Test::handleRequest"
+        Handler: "com.lambda.gradle.Main::handleRequest"
         Role: !GetAtt LambdaIMCRole.Arn
         Code:
           S3Bucket: !Ref BucketName

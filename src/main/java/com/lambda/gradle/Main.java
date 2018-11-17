@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-public class Test extends IMC implements RequestStreamHandler {
+public class Main extends IMC implements RequestStreamHandler {
     JSONParser parser = new JSONParser();
 
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
