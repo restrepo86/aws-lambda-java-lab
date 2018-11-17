@@ -88,6 +88,6 @@ Resources:
         Type: "AWS::Lambda::Permission"
         Properties:
           Action: "lambda:InvokeFunction"
-          FunctionName: !GetAtt "lambdaFunction.Arn"
+          FunctionName: !GetAtt "LambdaIMC.Arn"
           Principal: "ApiGateway.amazonaws.com"
           SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/POST/"
