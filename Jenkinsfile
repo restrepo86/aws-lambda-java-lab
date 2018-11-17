@@ -52,7 +52,7 @@ pipeline {
     }
   }
   environment {
-    projectName = 'juanesProject'
+    projectName = 'juanes-project'
     packageName = "lambdaGradle-${BUILD_NUMBER}.zip"
   }
 }
