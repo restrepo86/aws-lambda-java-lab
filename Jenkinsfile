@@ -2,6 +2,11 @@ pipeline {
   agent any
   stages {
     stage('Build') {
+      post{
+        always{
+          archiveArtifacts(artifacts: "build/distributions/${packageName}", fingerprint: true)
+        }
+      }
       steps {
         sh '''
         ./gradlew build -x test
@@ -12,11 +17,8 @@ pipeline {
     stage('Test') {
       post {
         always {
-          archiveArtifacts(artifacts: "build/distributions/${packageName}", fingerprint: true)
           junit 'build/test-results/test/*.xml'
-
         }
-
       }
       steps {
         sh './gradlew test'
