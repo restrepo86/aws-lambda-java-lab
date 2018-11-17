@@ -62,7 +62,7 @@ Resources:
         Properties:
           Name: !Sub "${ProjectName}-Api"
 
-      ApiGatewayRootMethod:
+    ApiGatewayRootMethod:
         Type: AWS::ApiGateway::Method
         Properties:
           AuthorizationType: "NONE"
