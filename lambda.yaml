@@ -76,7 +76,7 @@ Resources:
           ResourceId: !GetAtt "ApiGateway.RootResourceId"
           RestApiId: !Ref "ApiGateway"
 
-      ApiGatewayDeployment:
+    ApiGatewayDeployment:
         Type: "AWS::ApiGateway::Deployment"
         DependsOn:
           - "ApiGatewayRootMethod"
@@ -84,7 +84,7 @@ Resources:
           RestApiId: !Ref "ApiGateway"
           StageName: !Ref "ApiGatewayStageName"
 
-      LambdaApiGatewayInvoke:
+    LambdaApiGatewayInvoke:
         Type: "AWS::Lambda::Permission"
         Properties:
           Action: "lambda:InvokeFunction"
