@@ -48,7 +48,7 @@ pipeline {
                           "PackageName=${packageName}",
                           "BucketName=${projectName}-bucket"
                         ])
-            sh aws cloudformation list-exports --query "Exports[?Name == '${projectName}-lambda-Endpoint'].Value" --output text
+            sh "aws cloudformation list-exports --query \"Exports[?Name == '${projectName}-lambda-Endpoint'].Value\" --output text"
           }
 
         }
