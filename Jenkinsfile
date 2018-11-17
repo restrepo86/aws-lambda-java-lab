@@ -30,10 +30,10 @@ pipeline {
 
       }
     }
-    stage('Create Bucke/Update file') {
+    stage('Create Bucket/Update file') {
       steps {
         withAWS(credentials: 'awslab', region: 'us-east-1') {
-          cfnUpdate(stack: "${projectName}-s3", create: true, file: 's3.yaml')
+          cfnUpdate(stack: "${projectName}-s3", create: true, file: 's3.yaml', params:["BucketNameLambda"='juanes-lambda-function'])
           s3Upload(bucket: 'juanes-lambda-function', file: "${packageName}", workingDir: 'build/distributions/')
         }
       }

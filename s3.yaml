@@ -1,6 +1,10 @@
+Parameters:
+  BucketNameLambda:
+    Type: String
+
 Resources:
   S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: juanes-lambda-function
+      BucketName: !Ref BucketNameLambda
       AccessControl: BucketOwnerFullControl
