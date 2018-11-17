@@ -27,7 +27,7 @@ pipeline {
         withSonarQubeEnv('SonarQube Cloud') {
           sh 'sonar-scanner -Dproject.settings=sonar.properties'
         }
-        sleep(20)
+        sleep(10)
         waitForQualityGate true
       }
     }
