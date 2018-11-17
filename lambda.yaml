@@ -82,7 +82,7 @@ Resources:
           - "ApiGatewayRootMethod"
         Properties:
           RestApiId: !Ref "ApiGateway"
-          StageName: !Ref "ApiGatewayStageName"
+          StageName: dev
 
     LambdaApiGatewayInvoke:
         Type: "AWS::Lambda::Permission"
