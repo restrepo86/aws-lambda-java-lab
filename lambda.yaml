@@ -56,3 +56,38 @@ Resources:
           S3Key: !Ref PackageName
         Runtime: "java8"
         Timeout: "25"
+
+    ApiGateway:
+        Type: AWS::ApiGateway::RestApi
+        Properties:
+          Name: !Sub "${ProjectName}-Api"
+
+      ApiGatewayRootMethod:
+        Type: AWS::ApiGateway::Method
+        Properties:
+          AuthorizationType: "NONE"
+          HttpMethod: "POST"
+          Integration:
+            IntegrationHttpMethod: "POST"
+            Type: "AWS_PROXY"
+            Uri: !Sub
+              - "arn:aws:ApiGateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations"
+              - lambdaArn: !GetAtt "LambdaIMC.Arn"
+          ResourceId: !GetAtt "ApiGateway.RootResourceId"
+          RestApiId: !Ref "ApiGateway"
+
+      ApiGatewayDeployment:
+        Type: "AWS::ApiGateway::Deployment"
+        DependsOn:
+          - "ApiGatewayRootMethod"
+        Properties:
+          RestApiId: !Ref "ApiGateway"
+          StageName: !Ref "ApiGatewayStageName"
+
+      LambdaApiGatewayInvoke:
+        Type: "AWS::Lambda::Permission"
+        Properties:
+          Action: "lambda:InvokeFunction"
+          FunctionName: !GetAtt "lambdaFunction.Arn"
+          Principal: "ApiGateway.amazonaws.com"
+          SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/POST/"
