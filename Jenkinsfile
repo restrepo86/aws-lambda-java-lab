@@ -48,7 +48,7 @@ pipeline {
                           "PackageName=${packageName}",
                           "BucketName=${projectName}-bucket"
                         ])
-            cfnDescribe "${projectName}-lambda"
+            sh aws cloudformation list-exports --query "Exports[?Name == '${projectName}-lambda-Endpoint'].Value" --output text
           }
 
         }
