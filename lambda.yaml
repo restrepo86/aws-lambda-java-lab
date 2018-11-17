@@ -3,8 +3,12 @@ Parameters:
     Description: Nombre del proyecto
     Type: String
 
-  JarName:
+  PackageName:
     Description: Nombre del jar
+    Type: String
+
+  BucketName:
+    Description: Nombre del  bucket
     Type: String
 
 Resources:
@@ -48,7 +52,7 @@ Resources:
         Handler: "com.lambda.gradle.Test::handleRequest"
         Role: !GetAtt LambdaIMCRole.Arn
         Code:
-          S3Bucket: "juanes-lambda-function"
-          S3Key: !Ref JarName
+          S3Bucket: !Ref BucketName
+          S3Key: !Ref PackageName
         Runtime: "java8"
         Timeout: "25"

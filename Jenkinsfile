@@ -12,7 +12,7 @@ pipeline {
     stage('Test') {
       post {
         always {
-          archiveArtifacts(artifacts: 'build/libs/**/*.jar', fingerprint: true)
+          archiveArtifacts(artifacts: "build/distributions/${packageName}", fingerprint: true)
           junit 'build/test-results/test/*.xml'
 
         }
@@ -33,7 +33,7 @@ pipeline {
     stage('Create Bucket/Update file') {
       steps {
         withAWS(credentials: 'awslab', region: 'us-east-1') {
-          cfnUpdate(stack: "${projectName}-s3", create: true, file: 's3.yaml', params:["BucketNameLambda=juanes-lambda-function"])
+          cfnUpdate(stack: "${projectName}-s3", create: true, file: 's3.yaml', params:["BucketNameLambda=${projectName}-bucket"])
           s3Upload(bucket: 'juanes-lambda-function', file: "${packageName}", workingDir: 'build/distributions/')
         }
       }
@@ -41,7 +41,12 @@ pipeline {
     stage('Deploy Lambda') {
       steps {
         withAWS(credentials: 'awslab', region: 'us-east-1') {
-          cfnUpdate(stack: "${projectName}-lambda", create: true, file: 'lambda.yaml', params:["ProjectName=${projectName}", "JarName=${packageName}"])
+          cfnUpdate(stack: "${projectName}-lambda", create: true, file: 'lambda.yaml',
+            params:[
+              "ProjectName=${projectName}",
+              "PackageName=${packageName}",
+              "BucketName=${projectName}-bucket"
+            ])
         }
       }
     }
