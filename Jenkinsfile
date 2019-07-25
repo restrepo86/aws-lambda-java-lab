@@ -1,7 +1,7 @@
 pipeline {
   agent any
    environment {
-     projectName = 'tns-devops-juanes'
+     projectName = 'tns-devops-juanfer'
      packageName = "lambdaGradle-${BUILD_NUMBER}.zip"
    }
   stages {
